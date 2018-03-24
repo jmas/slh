@@ -1,17 +1,17 @@
-var assert = require("assert")
-var createStore = require("../src/index").createStore
+var assert = require('assert')
+var createStore = require('../src/index').createStore
 
 var counterState = { count: 0 }
 var counterActions = {
   increase: function() {
-    return function(state, actions) {
+    return function(state) {
       return {
         count: state.count + 1
       }
     }
   },
   decrease: function() {
-    return function(state, actions) {
+    return function(state) {
       return {
         count: state.count - 1
       }
@@ -19,28 +19,28 @@ var counterActions = {
   }
 }
 
-describe("store = createStore(counterState, counterActions)", function() {
+describe('store = createStore(counterState, counterActions)', function() {
   var store
   beforeEach(function() {
     store = createStore(counterState, counterActions)
   })
-  it("store.getState()", function() {
+  it('store.getState()', function() {
     assert.deepEqual(store.getState(), counterState)
   })
-  it("store.subscribe()", function(done) {
+  it('store.subscribe()', function(done) {
     store.subscribe(function() {
       done()
     })
     store.actions.increase()
   })
-  it("store.unsubscribe()", function() {
+  it('store.unsubscribe()', function() {
     var unsubscribe = store.subscribe(function() {
-      assert.fail("unsubscribe() do not remove store listener")
+      assert.fail('unsubscribe() do not remove store listener')
     })
     unsubscribe()
     store.actions.increase()
   })
-  it("store.actions", function() {
+  it('store.actions', function() {
     store.actions.increase()
     assert.deepEqual(store.getState(), { count: 1 })
     store.actions.decrease()
@@ -48,7 +48,7 @@ describe("store = createStore(counterState, counterActions)", function() {
   })
 })
 
-describe("store = createStore(<nested state>, <nested actions>)", function() {
+describe('store = createStore(<nested state>, <nested actions>)', function() {
   var store
   beforeEach(function() {
     var actions = {}
@@ -65,14 +65,14 @@ describe("store = createStore(<nested state>, <nested actions>)", function() {
       actions
     )
   })
-  it("store.getState()", function() {
+  it('store.getState()', function() {
     assert.deepEqual(store.getState(), {
       a: { count: 0 },
       b: { count: 0 },
       count: 0
     })
   })
-  it("store.actions", function() {
+  it('store.actions', function() {
     store.actions.a.increase()
     assert.deepEqual(store.getState(), {
       a: { count: 1 },

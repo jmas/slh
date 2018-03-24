@@ -6,7 +6,7 @@ function createStore(state, actions) {
   function clone(target, source) {
     var out = {}
     for (var i in target) out[i] = target[i]
-    for (var i in source) out[i] = source[i]
+    for (var j in source) out[j] = source[j]
     return out
   }
 
@@ -18,7 +18,11 @@ function createStore(state, actions) {
   }
 
   function notify() {
-    listeners.forEach(listener => (listener ? listener() : null))
+    listeners.forEach(function(listener) {
+      if (listener) {
+        listener()
+      }
+    })
   }
 
   function getState() {
@@ -31,13 +35,13 @@ function createStore(state, actions) {
 
   function wireActions(actions, setState, getState) {
     return Object.keys(actions).reduce(function(wiredActions, actionName) {
-      if (typeof actions[actionName] === "function") {
+      if (typeof actions[actionName] === 'function') {
         wiredActions[actionName] = function() {
           var actionResult = actions[actionName].apply(
             null,
             Array.prototype.slice.call(arguments)
           )
-          if (typeof actionResult === "function") {
+          if (typeof actionResult === 'function') {
             actionResult = actionResult(getState(), wiredActions)
           }
           if (actionResult && !actionResult.then && actionResult !== state) {
