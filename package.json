@@ -1,12 +1,12 @@
 {
   "name": "slh",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Store like in Hyperapp",
   "main": "dist/index.js",
   "author": "Alex Maslakov",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/jmas/slh.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmas/slh.git"
   },
   "keywords": [
     "store",
