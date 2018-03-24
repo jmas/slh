@@ -43,7 +43,9 @@ const unsubscribe = store.subscribe(() => {
   console.log(store.getState())
 })
 
-// > store.increase()
+// > store.actions
+// > { increase: Function, decrease: Function, increaseLater: Function, decreaseLater: Function }
+// > store.actions.increase()
 // > console.log(store.getState())
 // > { count: 1 }
 ```
