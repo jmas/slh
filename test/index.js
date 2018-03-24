@@ -16,6 +16,11 @@ var counterActions = {
         count: state.count - 1
       }
     }
+  },
+  increaseByOtherAction: function() {
+    return function(state, actions) {
+      actions.increase()
+    }
   }
 }
 
@@ -56,6 +61,7 @@ describe('store = createStore(<nested state>, <nested actions>)', function() {
     actions.b = counterActions
     actions.increase = counterActions.increase
     actions.decrease = counterActions.decrease
+    actions.increaseByOtherAction = counterActions.increaseByOtherAction
     store = createStore(
       {
         a: counterState,
@@ -108,6 +114,20 @@ describe('store = createStore(<nested state>, <nested actions>)', function() {
       a: { count: 0 },
       b: { count: 0 },
       count: 0
+    })
+  })
+  it('store.actions[.a].increaseByOtherAction()', function() {
+    store.actions.increaseByOtherAction()
+    assert.deepEqual(store.getState(), {
+      a: { count: 0 },
+      b: { count: 0 },
+      count: 1
+    })
+    store.actions.a.increaseByOtherAction()
+    assert.deepEqual(store.getState(), {
+      a: { count: 1 },
+      b: { count: 0 },
+      count: 1
     })
   })
 })
