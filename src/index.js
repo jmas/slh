@@ -1,14 +1,14 @@
+function clone(target, source) {
+  var out = {}
+  for (var i in target) out[i] = target[i]
+  for (var j in source) out[j] = source[j]
+  return out
+}
+
 function createStore(state, actions) {
   var listeners = []
   var wiredActions = wireActions(actions, setState, getState)
   state = clone({}, state)
-
-  function clone(target, source) {
-    var out = {}
-    for (var i in target) out[i] = target[i]
-    for (var j in source) out[j] = source[j]
-    return out
-  }
 
   function subscribe(listener) {
     var index = listeners.push(listener) - 1
