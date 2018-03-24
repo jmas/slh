@@ -4,6 +4,10 @@
   "description": "Store like in Hyperapp",
   "main": "dist/index.js",
   "author": "Alex Maslakov",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/jmas/slh.git"
+  },
   "keywords": [
     "store",
     "state",
