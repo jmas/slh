@@ -1,6 +1,6 @@
 {
   "name": "slh",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Store like in Hyperapp",
   "main": "dist/index.js",
   "author": "Alex Maslakov",
