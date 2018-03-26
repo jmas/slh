@@ -1,5 +1,5 @@
 var assert = require('assert')
-var createStore = require('../src/index').createStore
+var createStore = require('../dist/index').createStore
 
 var counterState = { count: 0 }
 var counterActions = {

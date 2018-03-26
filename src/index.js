@@ -5,7 +5,7 @@ function clone(target, source) {
   return out
 }
 
-function createStore(state, actions) {
+export function createStore(state, actions) {
   var listeners = []
   var wiredActions = wireActions(actions, setState, getState)
   state = clone({}, state)
@@ -74,6 +74,3 @@ function createStore(state, actions) {
   }
 }
 
-module.exports = {
-  createStore: createStore
-}
